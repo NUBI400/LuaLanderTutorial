@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="FastScriptReload.Editor.csproj" />
+  <Project Path="CodeMonkeyFree.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="FastScriptReload.Runtime.csproj" />
 </Solution>
