@@ -1,13 +1,31 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NewMonoBehaviourScript : MonoBehaviour {
-   private void Update()
+public class Lander : MonoBehaviour {
+    
+    private Rigidbody2D landerRigidbody2D;
+    
+    private void Awake()
     {
-       if (Keyboard.current.upArrowKey.isPressed)
+        landerRigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (Keyboard.current.upArrowKey.isPressed)
         {
-            Debug.Log("FOIIII");
+            float force =  700f;
+            landerRigidbody2D.AddForce(force * transform.up * Time.deltaTime);
         }
-        
+        if (Keyboard.current.leftArrowKey.isPressed)
+        {
+            float turnSpeed = +100f;
+            landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+        }       
+        if (Keyboard.current.rightArrowKey.isPressed)
+        {
+            float turnSpeed = -100f;
+            landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+        }
     }
 }
