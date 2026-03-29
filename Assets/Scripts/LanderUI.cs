@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -9,11 +10,15 @@ public class LanderUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI titleTextMesh;
     [SerializeField] private TextMeshProUGUI statsTextMEsh;
     [SerializeField] private Button nextBurron;
+    [SerializeField] private TextMeshProUGUI nextBurronTextMesh;
+
+
+    private Action nextButtonClickAction;
 
     private void Awake()
     {
         nextBurron.onClick.AddListener(() =>{
-            SceneManager.LoadScene(0);
+            nextButtonClickAction();
         });
     }
 
@@ -29,9 +34,13 @@ public class LanderUI : MonoBehaviour
         if (e.landingType == Lander.LandingType.Success)
         {
             titleTextMesh.text = "SUCCESSFUL LANDING!";
+            nextBurronTextMesh.text = "CONTINUE";
+            nextButtonClickAction = GameManager.Instance.GoToNextLevel;
         } else
         {
             titleTextMesh.text = "<color=#ff0000>CRASH!</color>";
+            nextBurronTextMesh.text = "RETRY";
+            nextButtonClickAction = GameManager.Instance.RetryLevel;
         }
 
         statsTextMEsh.text =
@@ -53,4 +62,12 @@ private void Hide()
 {
     gameObject.SetActive(false);
 }
+
+
+
+
+
+
+
+
 }
